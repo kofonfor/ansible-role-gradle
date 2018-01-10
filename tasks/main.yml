@@ -1,0 +1,3 @@
+- name: install gradle
+  apt: name=gradle
+  update_cache: yes
