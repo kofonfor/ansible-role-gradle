@@ -1,0 +1,6 @@
+package_download_path: "/tmp"
+gradle:
+    version: 4.4.1
+    install_path: /opt/gradle
+    download_mirror: https://services.gradle.org/distributions/
+
