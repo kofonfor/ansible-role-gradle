@@ -3,34 +3,24 @@
   tags:
     - gradle
 
-- set_fact:
-  gradle_package_name: gradle-{{ gradle.version }}-bin.zip
-  tags:
-    - gradle
-
 - name: check gradle package
-  stat: path={{ package_download_path }}/{{ gradle_package_name }}
+  stat: path={{ package_download_path }}/gradle-{{ gradle.version }}-bin.zip
   register: gradle_package_exists
   tags:
     - gradle
 
 - name: download gradle package
-  get_url: url={{ gradle.download_mirror }}/{{ gradle_package_name }} dest={{ package_download_path }}
+  get_url: url={{ gradle.download_mirror }}/gradle-{{ gradle.version }}-bin.zip dest={{ package_download_path }}
   when: not gradle_package_exists.stat.exists
   tags:
     - gradle
 
 - name: unarchive gradle package
-  unarchive: src={{ package_download_path }}/{{ gradle_package_name }} dest={{ gradle.install_path }} copy=no 
-  tags:
-    - gradle
-
-- set_fact:
-  gradle_bin_path: "{{ gradle.install_path }}/gradle-{{ gradle.version }}/bin/gradle"
+  unarchive: src={{ package_download_path }}/gradle-{{ gradle.version }}-bin.zip dest={{ gradle.install_path }} copy=no 
   tags:
     - gradle
 
 - name: set symlink to gradle bin
-  file: src={{ gradle_bin_path }} dest=/usr/bin/gradle state=link
+  file: src={{ gradle.install_path }}/gradle-{{ gradle.version }}/bin/gradle dest=/usr/bin/gradle state=link
   tags:
     - gradle
