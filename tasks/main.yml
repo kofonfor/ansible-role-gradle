@@ -26,7 +26,7 @@
     - gradle
 
 - set_fact:
-  gradle_bin_path: {{ gradle.install_path }}/gradle-{{ gradle.version }}/bin/gradle
+  gradle_bin_path: "{{ gradle.install_path }}/gradle-{{ gradle.version }}/bin/gradle"
   tags:
     - gradle
 
